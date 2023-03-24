@@ -15,7 +15,7 @@ const myLogger = (req, res, next) => {
 
 // Static Files
 app.use(express.static('public'));
-app.use(myLogger);
+app.use(express.urlencoded({extended:true}));
 
 // Routes
 app.get('/', (req, res) => {
@@ -30,6 +30,9 @@ app.get('/add', (req, res) => {
   res.render('add');
 });
 
+app.post('/photos', (req, res) => {
+  res.render('add');
+});
 
 const port = 3000;
 app.listen(port, () => {

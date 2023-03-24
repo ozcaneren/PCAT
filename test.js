@@ -16,25 +16,11 @@ const photoSchema = new Schema({
 const Photo = mongoose.model('Photo', photoSchema);
 
 //create a photo
-//Photo.create({
-  //title: 'My first photo',
-  //description: 'This is my first photo',
-//});
+Photo.create({
+  title: 'My first photo',
+  description: 'This is my first photo',
+});
 
 //read a photo
 //Photo.find({}, (err, data) => {
 //});
-
-//update a photo
-const id = '641c44f5fa8d2cf097009c34';
-
-Photo.findByIdAndUpdate(
-  id,
-  {
-    title: 'My first photo updated',
-    description: 'Photo description updated',
-  },
-  (err, data) => {
-    console.log(data);
-  }
-);
