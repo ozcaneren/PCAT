@@ -6,6 +6,7 @@ const path = require('path');
 const ejs = require('ejs');
 const fs = require('fs');
 const Photo = require('./models/Photo');
+const photoController = require('./controllers/photoControllers');
 
 const app = express();
 
@@ -26,6 +27,8 @@ app.use(fileUpload());
 app.use(methodOverride('_method', { methods: ['POST', 'GET'] }));
 
 // Routes
+app.get('/', photoController.getAllPhotos);
+
 app.get('/', async (req, res) => {
   const photos = await Photo.find({}).sort('-dateCreated');
   res.render('index', {
