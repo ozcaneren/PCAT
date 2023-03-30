@@ -12,10 +12,17 @@ const pageController = require('./controllers/pageController');
 const app = express();
 
 //connect DB
-mongoose.connect('mongodb://127.0.0.1:27017', {
+mongoose.connect('mongodb://localhost:27017/mongo', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB bağlantı hatası!: '));
+db.once('open', function () {
+  console.log('Veritabanı başarıyla bağlandı');
+});
+
 
 // EJS
 app.set('view engine', 'ejs');
@@ -27,7 +34,7 @@ app.use(express.json());
 app.use(fileUpload());
 app.use(methodOverride('_method', { methods: ['POST', 'GET'] }));
 
-// Routes
+// Routesmongodb://localhost:27017/mongo
 app.get('/', photoController.getAllPhotos);
 app.get('/photos/:id', photoController.getPhoto);
 app.post('/photos', photoController.createPhoto);
